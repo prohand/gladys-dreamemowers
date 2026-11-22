@@ -10,6 +10,11 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Fixed
+
+- The Release and Build workflows now show in the Actions tab: GitHub had not
+  registered them, their file reached `main` before it was the default branch.
+
 ### Added
 
 - First version of the Dreame Mowers integration, built from the official

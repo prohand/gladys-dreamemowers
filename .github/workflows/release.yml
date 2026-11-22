@@ -16,6 +16,9 @@
 # Why call build.yml instead of relying on the tag push: a tag pushed with the
 # default GITHUB_TOKEN does NOT trigger other workflows, so we invoke the build
 # ourselves. No personal access token to create.
+#
+# GitHub lists a workflow that only runs by hand or on a tag (this one) once a
+# push to the DEFAULT branch adds or changes its file: keep it on `main`.
 # -----------------------------------------------------------------------------
 name: Release
 

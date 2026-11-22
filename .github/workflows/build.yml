@@ -14,6 +14,9 @@
 #
 # That is ALL it takes to "publish": tag, push, and the decentralized indexer
 # does the rest (no review, no account to create).
+#
+# GitHub lists a workflow that only runs by hand or on a tag (this one) once a
+# push to the DEFAULT branch adds or changes its file: keep it on `main`.
 # -----------------------------------------------------------------------------
 name: Build and publish image
 
