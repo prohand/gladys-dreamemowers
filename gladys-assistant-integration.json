@@ -1,0 +1,612 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Dreame Mowers",
+  "description": {
+    "en": "Control your Dreame and MOVA robot lawn mowers: status, battery, start, pause and dock.",
+    "fr": "Pilotez vos robots tondeuses Dreame et MOVA : état, batterie, tonte, pause et retour base.",
+    "de": "Steuere deine Dreame- und MOVA-Mähroboter: Status, Akku, Start, Pause und Station.",
+    "es": "Controle sus robots cortacésped Dreame y MOVA: estado, batería, inicio, pausa y base."
+  },
+  "version": "1.0.0",
+  "docker_image": "ghcr.io/prohand/gladys-dreamemowers:1.0.0",
+  "gladys_version": ">=5.3.0",
+  "cover_image": "https://raw.githubusercontent.com/prohand/gladys-dreamemowers/main/cover.png",
+  "categories": ["appliances"],
+  "keywords": [
+    "dreame",
+    "mova",
+    "lawn mower",
+    "robot mower",
+    "tondeuse",
+    "robot tondeuse",
+    "mähroboter",
+    "cortacésped",
+    "dreame a1",
+    "dreame a2"
+  ],
+  "countries": [
+    "FR",
+    "BE",
+    "CH",
+    "LU",
+    "DE",
+    "AT",
+    "NL",
+    "ES",
+    "PT",
+    "IT",
+    "GB",
+    "PL",
+    "CZ",
+    "SE",
+    "DK",
+    "NO",
+    "FI",
+    "US",
+    "CA",
+    "AU"
+  ],
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Getting started",
+        "fr": "Pour commencer",
+        "de": "Erste Schritte",
+        "es": "Primeros pasos"
+      },
+      "description": {
+        "en": "Dreame mowers are reached through the Dreame cloud, like in the app: enter the account you use in the Dreamehome (or MOVAhome) app and the region chosen when you created it. Your mowers then appear in the Discovery tab.",
+        "fr": "Les tondeuses Dreame sont pilotées via le cloud Dreame, comme dans l'application : saisissez le compte de l'application Dreamehome (ou MOVAhome) et la région choisie à sa création. Vos tondeuses apparaissent ensuite dans l'onglet Découverte.",
+        "de": "Dreame-Mäher werden wie in der App über die Dreame-Cloud gesteuert: Gib das Konto der Dreamehome- (oder MOVAhome-) App und die bei der Erstellung gewählte Region ein. Deine Mäher erscheinen dann im Reiter Erkennung.",
+        "es": "Los robots Dreame se controlan a través de la nube de Dreame, como en la app: introduzca la cuenta de la app Dreamehome (o MOVAhome) y la región elegida al crearla. Sus robots aparecerán en la pestaña Descubrimiento."
+      },
+      "links": [
+        {
+          "url": "https://github.com/prohand/gladys-dreamemowers/blob/main/docs/en.md",
+          "label": {
+            "en": "Full documentation",
+            "fr": "Documentation complète",
+            "de": "Vollständige Dokumentation",
+            "es": "Documentación completa"
+          }
+        }
+      ]
+    },
+    {
+      "key": "account_type",
+      "type": "select",
+      "label": {
+        "en": "App",
+        "fr": "Application",
+        "de": "App",
+        "es": "Aplicación"
+      },
+      "description": {
+        "en": "The app your account was created in.",
+        "fr": "L'application dans laquelle votre compte a été créé.",
+        "de": "Die App, in der dein Konto erstellt wurde.",
+        "es": "La app en la que se creó su cuenta."
+      },
+      "required": true,
+      "default": "dreame",
+      "options": [
+        {
+          "value": "dreame",
+          "label": {
+            "en": "Dreamehome",
+            "fr": "Dreamehome",
+            "de": "Dreamehome",
+            "es": "Dreamehome"
+          }
+        },
+        {
+          "value": "mova",
+          "label": {
+            "en": "MOVAhome",
+            "fr": "MOVAhome",
+            "de": "MOVAhome",
+            "es": "MOVAhome"
+          }
+        }
+      ]
+    },
+    {
+      "key": "username",
+      "type": "string",
+      "label": {
+        "en": "E-mail",
+        "fr": "E-mail",
+        "de": "E-Mail",
+        "es": "Correo electrónico"
+      },
+      "description": {
+        "en": "E-mail (or phone number) of your app account.",
+        "fr": "E-mail (ou numéro de téléphone) de votre compte.",
+        "de": "E-Mail (oder Telefonnummer) deines App-Kontos.",
+        "es": "Correo (o teléfono) de su cuenta de la app."
+      },
+      "placeholder": {
+        "en": "e.g. me@example.com",
+        "fr": "ex. moi@exemple.fr",
+        "de": "z. B. ich@beispiel.de",
+        "es": "p. ej. yo@ejemplo.es"
+      },
+      "required": true
+    },
+    {
+      "key": "password",
+      "type": "secret",
+      "label": {
+        "en": "Password",
+        "fr": "Mot de passe",
+        "de": "Passwort",
+        "es": "Contraseña"
+      },
+      "description": {
+        "en": "Password of your app account. Accounts created with Google or Apple sign-in need a password set in the app first.",
+        "fr": "Mot de passe de votre compte. Un compte créé avec Google ou Apple doit d'abord avoir un mot de passe défini dans l'application.",
+        "de": "Passwort deines App-Kontos. Bei Anmeldung mit Google oder Apple zuerst in der App ein Passwort festlegen.",
+        "es": "Contraseña de su cuenta. Una cuenta creada con Google o Apple necesita antes una contraseña definida en la app."
+      },
+      "required": true
+    },
+    {
+      "key": "region",
+      "type": "select",
+      "label": {
+        "en": "Region",
+        "fr": "Région",
+        "de": "Region",
+        "es": "Región"
+      },
+      "description": {
+        "en": "Cloud region of the account (Europe for most European users).",
+        "fr": "Région cloud du compte (Europe pour la plupart des utilisateurs européens).",
+        "de": "Cloud-Region des Kontos (Europa für die meisten Nutzer in Europa).",
+        "es": "Región de la nube de la cuenta (Europa para la mayoría de usuarios europeos)."
+      },
+      "required": true,
+      "default": "eu",
+      "options": [
+        {
+          "value": "eu",
+          "label": {
+            "en": "Europe",
+            "fr": "Europe",
+            "de": "Europa",
+            "es": "Europa"
+          }
+        },
+        {
+          "value": "us",
+          "label": {
+            "en": "North America",
+            "fr": "Amérique du Nord",
+            "de": "Nordamerika",
+            "es": "Norteamérica"
+          }
+        },
+        {
+          "value": "sg",
+          "label": {
+            "en": "Asia-Pacific (Singapore)",
+            "fr": "Asie-Pacifique (Singapour)",
+            "de": "Asien-Pazifik (Singapur)",
+            "es": "Asia-Pacífico (Singapur)"
+          }
+        },
+        {
+          "value": "ru",
+          "label": {
+            "en": "Russia",
+            "fr": "Russie",
+            "de": "Russland",
+            "es": "Rusia"
+          }
+        },
+        {
+          "value": "cn",
+          "label": {
+            "en": "China",
+            "fr": "Chine",
+            "de": "China",
+            "es": "China"
+          }
+        }
+      ]
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the states",
+        "fr": "Langue des états",
+        "de": "Sprache der Zustände",
+        "es": "Idioma de los estados"
+      },
+      "description": {
+        "en": "Language of the Status and Error texts of the mowers.",
+        "fr": "Langue des textes État et Erreur des tondeuses.",
+        "de": "Sprache der Status- und Fehlertexte der Mäher.",
+        "es": "Idioma de los textos Estado y Error de los robots."
+      },
+      "required": false,
+      "default": "en",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
+    },
+    {
+      "key": "poll_frequency",
+      "type": "number",
+      "label": {
+        "en": "Refresh interval (s)",
+        "fr": "Intervalle de rafraîchissement (s)",
+        "de": "Aktualisierungsintervall (s)",
+        "es": "Intervalo de actualización (s)"
+      },
+      "description": {
+        "en": "How often the cloud is read, in seconds (one minute minimum).",
+        "fr": "Fréquence de lecture du cloud, en secondes (une minute minimum).",
+        "de": "Wie oft die Cloud gelesen wird, in Sekunden (mindestens eine Minute).",
+        "es": "Frecuencia de lectura de la nube, en segundos (un minuto como mínimo)."
+      },
+      "required": false,
+      "default": 60,
+      "min": 60,
+      "max": 3600
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "timeout_seconds": 60
+    }
+  ],
+  "widgets": [
+    {
+      "key": "mower",
+      "label": {
+        "en": "Robot lawn mower",
+        "fr": "Robot tondeuse",
+        "de": "Mähroboter",
+        "es": "Robot cortacésped"
+      },
+      "description": {
+        "en": "Status, battery and buttons of a Dreame or MOVA mower.",
+        "fr": "État, batterie et boutons d'une tondeuse Dreame ou MOVA.",
+        "de": "Status, Akku und Tasten eines Dreame- oder MOVA-Mähers.",
+        "es": "Estado, batería y botones de un robot Dreame o MOVA."
+      },
+      "icon": "scissors",
+      "action_timeout_seconds": 30,
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Mower",
+            "fr": "Tondeuse",
+            "de": "Mäher",
+            "es": "Robot cortacésped"
+          },
+          "description": {
+            "en": "Empty: the first mower of the account.",
+            "fr": "Vide : la première tondeuse du compte.",
+            "de": "Leer: der erste Mäher des Kontos.",
+            "es": "Vacío: el primer robot de la cuenta."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "status_changed",
+      "label": {
+        "en": "Mower status changes",
+        "fr": "L'état de la tondeuse change",
+        "de": "Status des Mähers ändert sich",
+        "es": "Cambia el estado del robot"
+      },
+      "description": {
+        "en": "The mower starts mowing, pauses, returns, docks or stops on an error.",
+        "fr": "La tondeuse démarre, se met en pause, rentre, se gare ou s'arrête sur erreur.",
+        "de": "Der Mäher startet, pausiert, kehrt zurück, parkt oder stoppt mit Fehler.",
+        "es": "El robot empieza, se pausa, vuelve, se aparca o se detiene por un error."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Mower",
+            "fr": "Tondeuse",
+            "de": "Mäher",
+            "es": "Robot cortacésped"
+          }
+        },
+        {
+          "key": "status",
+          "type": "multi_select",
+          "label": {
+            "en": "New status",
+            "fr": "Nouvel état",
+            "de": "Neuer Status",
+            "es": "Nuevo estado"
+          },
+          "options": [
+            {
+              "value": "mowing",
+              "label": {
+                "en": "Mowing",
+                "fr": "Tond",
+                "de": "Mäht",
+                "es": "Cortando"
+              }
+            },
+            {
+              "value": "paused",
+              "label": {
+                "en": "Paused",
+                "fr": "En pause",
+                "de": "Pausiert",
+                "es": "En pausa"
+              }
+            },
+            {
+              "value": "returning",
+              "label": {
+                "en": "Returning to base",
+                "fr": "Retourne à la base",
+                "de": "Fährt zur Station",
+                "es": "Volviendo a la base"
+              }
+            },
+            {
+              "value": "docked",
+              "label": {
+                "en": "On its base",
+                "fr": "Sur sa base",
+                "de": "In der Station",
+                "es": "En su base"
+              }
+            },
+            {
+              "value": "error",
+              "label": {
+                "en": "In error",
+                "fr": "En erreur",
+                "de": "Fehler",
+                "es": "En error"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "status",
+          "type": "string",
+          "label": {
+            "en": "New status",
+            "fr": "Nouvel état",
+            "de": "Neuer Status",
+            "es": "Nuevo estado"
+          }
+        },
+        {
+          "key": "previous_status",
+          "type": "string",
+          "label": {
+            "en": "Previous status",
+            "fr": "État précédent",
+            "de": "Vorheriger Status",
+            "es": "Estado anterior"
+          }
+        },
+        {
+          "key": "battery",
+          "type": "number",
+          "label": {
+            "en": "Battery (%)",
+            "fr": "Batterie (%)",
+            "de": "Akku (%)",
+            "es": "Batería (%)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "error_occurred",
+      "label": {
+        "en": "Mower reports an error",
+        "fr": "La tondeuse signale une erreur",
+        "de": "Mäher meldet einen Fehler",
+        "es": "El robot indica un error"
+      },
+      "description": {
+        "en": "The mower reports a new error (stuck, tilted, blade blocked…).",
+        "fr": "La tondeuse signale une nouvelle erreur (coincée, penchée, lame bloquée…).",
+        "de": "Der Mäher meldet einen neuen Fehler (festgefahren, gekippt, Messer blockiert…).",
+        "es": "El robot indica un nuevo error (atascado, inclinado, cuchilla bloqueada…)."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Mower",
+            "fr": "Tondeuse",
+            "de": "Mäher",
+            "es": "Robot cortacésped"
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "error_code",
+          "type": "number",
+          "label": {
+            "en": "Error code",
+            "fr": "Code d'erreur",
+            "de": "Fehlercode",
+            "es": "Código de error"
+          }
+        },
+        {
+          "key": "error_text",
+          "type": "string",
+          "label": {
+            "en": "Error",
+            "fr": "Erreur",
+            "de": "Fehler",
+            "es": "Error"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "mower_command",
+      "label": {
+        "en": "Control a mower",
+        "fr": "Piloter une tondeuse",
+        "de": "Mäher steuern",
+        "es": "Controlar un robot"
+      },
+      "description": {
+        "en": "Start, pause, stop or send a Dreame mower back to its base.",
+        "fr": "Démarre, met en pause, arrête ou renvoie à la base une tondeuse Dreame.",
+        "de": "Startet, pausiert, stoppt einen Dreame-Mäher oder schickt ihn zur Station.",
+        "es": "Inicia, pausa, detiene o envía a la base un robot Dreame."
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Mower",
+            "fr": "Tondeuse",
+            "de": "Mäher",
+            "es": "Robot cortacésped"
+          },
+          "required": true
+        },
+        {
+          "key": "command",
+          "type": "select",
+          "label": {
+            "en": "Command",
+            "fr": "Commande",
+            "de": "Befehl",
+            "es": "Orden"
+          },
+          "required": true,
+          "default": "start",
+          "options": [
+            {
+              "value": "start",
+              "label": {
+                "en": "Start mowing",
+                "fr": "Démarrer la tonte",
+                "de": "Mähen starten",
+                "es": "Empezar a cortar"
+              }
+            },
+            {
+              "value": "pause",
+              "label": {
+                "en": "Pause",
+                "fr": "Mettre en pause",
+                "de": "Pausieren",
+                "es": "Pausar"
+              }
+            },
+            {
+              "value": "stop",
+              "label": {
+                "en": "Stop",
+                "fr": "Arrêter",
+                "de": "Stoppen",
+                "es": "Detener"
+              }
+            },
+            {
+              "value": "dock",
+              "label": {
+                "en": "Return to base",
+                "fr": "Retour à la base",
+                "de": "Zurück zur Station",
+                "es": "Volver a la base"
+              }
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "key": "sent",
+          "type": "boolean",
+          "label": {
+            "en": "Command sent",
+            "fr": "Commande envoyée",
+            "de": "Befehl gesendet",
+            "es": "Orden enviada"
+          }
+        }
+      ]
+    }
+  ]
+}
