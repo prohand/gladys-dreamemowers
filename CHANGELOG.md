@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-22
+
 ### Fixed
 
 - The Release and Build workflows now show in the Actions tab: GitHub had not
@@ -35,4 +37,5 @@ the notes of the version's GitHub Release.
   Release, multi-arch build and GitHub Release workflows, Dependabot.
 - `SECURITY.md` and `CLAUDE.md`.
 
-[Unreleased]: https://github.com/prohand/gladys-dreamemowers/commits/main
+[Unreleased]: https://github.com/prohand/gladys-dreamemowers/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/prohand/gladys-dreamemowers/releases/tag/v1.0.1

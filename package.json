@@ -1,6 +1,6 @@
 {
   "name": "gladys-dreamemowers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Gladys Assistant external integration for Dreame and MOVA robot lawn mowers (Dreamehome cloud).",
   "type": "module",
